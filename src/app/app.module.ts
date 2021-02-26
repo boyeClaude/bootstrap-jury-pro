@@ -3,16 +3,38 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EvenementsComponent } from './evenements/evenements.component';
+import { JuryProAcceuilComponent } from './jury-pro-acceuil/jury-pro-acceuil.component';
+import { EvenementComponent } from './evenements/evenement/evenement.component';
+import { AjouterEvenementComponent } from './evenements/ajouter-evenement/ajouter-evenement.component';
+import { ContainerEvenementsComponent } from './container-evenements/container-evenements.component';
+import { CriteresComponent } from './criteres/criteres.component';
+import { JurysComponent } from './jurys/jurys.component';
+import { CandidatsComponent } from './candidats/candidats.component';
+import { ResultatsComponent } from './resultats/resultats.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EvenementsComponent,
+    JuryProAcceuilComponent,
+    EvenementComponent,
+    AjouterEvenementComponent,
+    ContainerEvenementsComponent,
+    CriteresComponent,
+    JurysComponent,
+    CandidatsComponent,
+    ResultatsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatTabsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
