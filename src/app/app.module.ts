@@ -14,6 +14,11 @@ import { CandidatsComponent } from './candidats/candidats.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AjouterCritereComponent } from './criteres/ajouter-critere/ajouter-critere.component';
+import { AjouterJuryComponent } from './jurys/ajouter-jury/ajouter-jury.component';
+import { CandidatComponent } from './candidats/candidat/candidat.component';
+import { AjouterCandidatComponent } from './candidats/ajouter-candidat/ajouter-candidat.component';
+import { LoginUserComponent } from './users/login-user/login-user.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     JurysComponent,
     CandidatsComponent,
     ResultatsComponent,
+    AjouterCritereComponent,
+    AjouterJuryComponent,
+    CandidatComponent,
+    AjouterCandidatComponent,
   ],
   imports: [
     BrowserModule,
