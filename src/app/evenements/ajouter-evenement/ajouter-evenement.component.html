@@ -1,6 +1,27 @@
 <app-header></app-header>
 
 <div class="container my-5">
+  {{ evenementForm.value | json }}
+  {{ evenementForm.valid | json }}
+
+  <!--modal success-->
+  <div
+    *ngIf="alert"
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    <strong>Succès!!! </strong> &nbsp; Evenement Ajouté avec succès
+    <button
+      (click)="alertClose()"
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <h3 class="mx-5">Ajouter un Evenement</h3>
   <form [formGroup]="evenementForm" (ngSubmit)="onSaveEvenement()" class="mx-5">
     <div class="mb-3">
@@ -55,6 +76,12 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <button
+      [disabled]="!this.evenementForm.valid"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Enregistrer
+    </button>
   </form>
 </div>

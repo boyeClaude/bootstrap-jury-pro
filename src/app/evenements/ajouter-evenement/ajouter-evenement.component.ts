@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AjouterEvenementService } from './ajouter-evenement.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class AjouterEvenementComponent implements OnInit {
   evenementForm: FormGroup;
   evenementType = ['candidat', 'groupe'];
   selectedFile: File = null;
+  alert: boolean = false;
 
   constructor(
     private ajouterEvenementService: AjouterEvenementService,
@@ -23,11 +24,11 @@ export class AjouterEvenementComponent implements OnInit {
 
   ngOnInit(): void {
     this.evenementForm = this.fb.group({
-      evenement_photo: [''],
-      evenement_nom: [''],
-      evenement_type: [''],
-      evenement_date_debut: [''],
-      evenement_date_fin: [''],
+      evenement_photo: ['', Validators.required],
+      evenement_nom: ['', Validators.required],
+      evenement_type: ['', Validators.required],
+      evenement_date_debut: ['', Validators.required],
+      evenement_date_fin: ['', Validators.required],
     });
   }
 
@@ -41,8 +42,19 @@ export class AjouterEvenementComponent implements OnInit {
         (res) => console.log(res),
         (error) => console.log(error)
       );
-
       this.evenementForm.reset();
+      this.alert = true;
     }
   }
+
+  alertClose() {
+    this.alert = false;
+    console.log(this.alert);
+  }
+
+  // alertCloseAfterDelay() {
+  //   setTimeout(() => {
+  //     this.alert = false;
+  //   }, 1000);
+  // }
 }
