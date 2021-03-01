@@ -1,26 +1,46 @@
-<div class="col-sm m-4">
-  <div class="card" style="width: 25rem">
-    <a routerLink="/container-evenements">
-      <img
-        src="../../assets/beauty-contest.jpg"
-        class="card-img-top"
-        alt="..."
-      />
-    </a>
-    <div class="card-body">
-      <h5 class="card-title">Event title</h5>
-      <div class="card-text">
-        <p>Nombre de participants : 34</p>
-        <div>
-          <p>Date Debut: 22-02-2902</p>
-          <p>Date Fin: 22-02-2902</p>
+<div class="d-flex flex-wrap mt-4">
+  <ng-container *ngFor="let evenement of evenements">
+    <div class="col-sm m-2">
+      <div class="card" style="width: 25rem">
+        <a
+          (click)="sendEventId(evenement?.evenement_id)"
+          style="cursor: pointer"
+        >
+          <img
+            [src]="'data:image/jpg;base64,' + evenement?.evenement_photo"
+            class="card-img-top"
+            alt="..."
+          />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{ evenement?.evenement_nom }}</h5>
+          <div class="card-text">
+            <p *ngIf="evenement?.participant === null">Aucun participant</p>
+            <p *ngIf="evenement?.participant">
+              Nombre de participants : {{ evenement?.participant }}
+            </p>
+            <div>
+              <div>
+                <p>Date Debut: {{ evenement?.evenement_date_debut }}</p>
+                <p>Date Fin: {{ evenement?.evenement_date_fin }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <a
+              (click)="editEvent(evenement?.evenement_id)"
+              class="btn btn-primary"
+              >Modifier</a
+            >
+            <a
+              (click)="deleteEvent(evenement?.evenement_id)"
+              class="btn btn-danger"
+              >Supprimer</a
+            >
+          </div>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between">
-        <a href="#" class="btn btn-primary">Modifier</a>
-        <a href="#" class="btn btn-danger">Supprimer</a>
-      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

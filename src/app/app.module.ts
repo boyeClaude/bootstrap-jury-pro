@@ -18,7 +18,13 @@ import { AjouterCritereComponent } from './criteres/ajouter-critere/ajouter-crit
 import { AjouterJuryComponent } from './jurys/ajouter-jury/ajouter-jury.component';
 import { CandidatComponent } from './candidats/candidat/candidat.component';
 import { AjouterCandidatComponent } from './candidats/ajouter-candidat/ajouter-candidat.component';
-import { LoginUserComponent } from './users/login-user/login-user.component';
+import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateCritereComponent } from './criteres/update-critere/update-critere.component';
+import { UpdateJuryComponent } from './jurys/update-jury/update-jury.component';
+import { UpdateCandidatComponent } from './candidats/update-candidat/update-candidat.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +42,19 @@ import { LoginUserComponent } from './users/login-user/login-user.component';
     AjouterJuryComponent,
     CandidatComponent,
     AjouterCandidatComponent,
+    HeaderComponent,
+    UpdateCritereComponent,
+    UpdateJuryComponent,
+    UpdateCandidatComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
     MatTabsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

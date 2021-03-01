@@ -1,8 +1,12 @@
 <app-header></app-header>
 
 <div class="container my-5">
-  <h3 class="mx-5">Ajouter un critere</h3>
-  <form [formGroup]="critereForm" (ngSubmit)="onSaveCritere()" class="mx-5">
+  <h3 class="mx-5">Modifier Critere</h3>
+  <form
+    [formGroup]="UpdateCritereForm"
+    (ngSubmit)="onUpdateCritere()"
+    class="mx-5"
+  >
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Libelle</label>
       <input
@@ -22,7 +26,7 @@
 
     <button
       type="submit"
-      [disabled]="!this.critereForm.valid"
+      [disabled]="!this.UpdateCritereForm.valid"
       class="btn btn-primary"
     >
       Enregistrer

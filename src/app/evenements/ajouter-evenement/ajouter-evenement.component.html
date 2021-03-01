@@ -1,39 +1,58 @@
+<app-header></app-header>
+
 <div class="container my-5">
   <h3 class="mx-5">Ajouter un Evenement</h3>
-  <form class="mx-5">
+  <form [formGroup]="evenementForm" (ngSubmit)="onSaveEvenement()" class="mx-5">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Evenement Nom</label>
       <input
         type="email"
         class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
+        formControlName="evenement_nom"
       />
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label"
         >Evenement Type</label
       >
-      <select class="form-select" class="form-control">
+      <select
+        class="form-select"
+        class="form-control"
+        formControlName="evenement_type"
+      >
         <option disabled>Selectionnez le type</option>
-        <option value="1">Candidat</option>
-        <option value="1">Candidat</option>
+        <option *ngFor="let type of evenementType" [value]="type">
+          {{ type }}
+        </option>
       </select>
     </div>
 
     <div class="mb-3">
       <label for="">Date Debut</label>
-      <input type="date" class="form-control" />
+      <input
+        type="date"
+        class="form-control"
+        formControlName="evenement_date_debut"
+      />
     </div>
 
     <div class="mb-3">
       <label for="">Date Fin</label>
-      <input type="date" class="form-control" />
+      <input
+        type="date"
+        class="form-control"
+        formControlName="evenement_date_fin"
+      />
     </div>
 
     <div class="mb-3">
       <label for="">Photo</label>
-      <input type="file" class="form-control" id="inputGroupFile02" />
+      <input
+        type="file"
+        class="form-control"
+        formControlName="evenement_photo"
+        (change)="onFileSelect($event)"
+      />
     </div>
 
     <button type="submit" class="btn btn-primary">Enregistrer</button>
