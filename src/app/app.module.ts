@@ -9,7 +9,7 @@ import { EvenementComponent } from './evenements/evenement/evenement.component';
 import { AjouterEvenementComponent } from './evenements/ajouter-evenement/ajouter-evenement.component';
 import { ContainerEvenementsComponent } from './container-evenements/container-evenements.component';
 import { CriteresComponent } from './criteres/criteres.component';
-import { JurysComponent } from './jurys/jurys.component';
+// import { JurysComponent } from './jurys/jurys.component';
 import { CandidatsComponent } from './candidats/candidats.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateCritereComponent } from './criteres/update-critere/update-critere.component';
 import { UpdateJuryComponent } from './jurys/update-jury/update-jury.component';
 import { UpdateCandidatComponent } from './candidats/update-candidat/update-candidat.component';
+import { ModalAlertComponent } from './shared/modal-alert/modal-alert.component';
+import { UpdateEvenementComponent } from './evenements/update-evenement/update-evenement.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { UpdateCandidatComponent } from './candidats/update-candidat/update-cand
     AjouterEvenementComponent,
     ContainerEvenementsComponent,
     CriteresComponent,
-    JurysComponent,
+    // JurysComponent,
     CandidatsComponent,
     ResultatsComponent,
     AjouterCritereComponent,
@@ -46,6 +48,8 @@ import { UpdateCandidatComponent } from './candidats/update-candidat/update-cand
     UpdateCritereComponent,
     UpdateJuryComponent,
     UpdateCandidatComponent,
+    ModalAlertComponent,
+    UpdateEvenementComponent,
   ],
   imports: [
     BrowserModule,

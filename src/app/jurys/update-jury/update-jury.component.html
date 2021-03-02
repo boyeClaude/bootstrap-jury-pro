@@ -1,24 +1,51 @@
 <app-header></app-header>
 <div class="container my-5">
   <h3 class="mx-5">Modifier jury</h3>
-  <form class="mx-5">
+  <!--modal success-->
+  <app-modal-alert
+    [success]="true"
+    [alert]="alert"
+    [alertMessage]="'Success'"
+    [message]="'Modification effectuée avec succès'"
+    (alertClose)="alertClose()"
+  >
+  </app-modal-alert>
+  <form [formGroup]="updateJuryForm" (ngSubmit)="onUpdateJury()" class="mx-5">
+    <div class="mb-3" *ngIf="!this.jury?.evenement_id">
+      <label for="exampleInputEmail1" class="form-label">Id </label>
+      <input type="text" class="form-control" formControlName="jury_id" />
+    </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Code </label>
-      <input type="text" class="form-control" />
+      <input type="text" class="form-control" formControlName="code_id" />
     </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Nom Complet</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="jury_nom_complet"
+      />
     </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Telephone</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="jury_telephone"
+      />
     </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email</label>
-      <input type="email" class="form-control" />
+      <input type="email" class="form-control" formControlName="jury_email" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <button
+      [disabled]="!this.updateJuryForm.dirty"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Enregistrer
+    </button>
   </form>
 </div>

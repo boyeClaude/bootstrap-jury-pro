@@ -1,22 +1,30 @@
 <app-header></app-header>
 
 <div class="container my-5">
-  {{ evenementForm.value | json }}
-  <p>valid: {{ evenementForm.valid | json }}</p>
-  <p>dirty: {{ evenementForm.dirty | json }}</p>
+  {{ updateEvenementForm.value | json }}
+  <p>valid: {{ updateEvenementForm.valid | json }}</p>
+  <p>dirty: {{ updateEvenementForm.dirty | json }}</p>
 
   <!--modal success-->
   <app-modal-alert
     [success]="true"
     [alert]="alert"
     [alertMessage]="'Success'"
-    [message]="'Evenement ajouté avec succès'"
+    [message]="'Evenement modifié avec succès'"
     (alertClose)="alertClose()"
   >
   </app-modal-alert>
 
-  <h3 class="mx-5">Ajouter un Evenement</h3>
-  <form [formGroup]="evenementForm" (ngSubmit)="onSaveEvenement()" class="mx-5">
+  <h3 class="mx-5">Modifier un Evenement</h3>
+  <form
+    [formGroup]="updateEvenementForm"
+    (ngSubmit)="onUpdateEvenement()"
+    class="mx-5"
+  >
+    <div *ngIf="!this.event?.evenement_id" class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Evenement id</label>
+      <input type="email" class="form-control" formControlName="evenement_id" />
+    </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Evenement Nom</label>
       <input
@@ -70,7 +78,7 @@
     </div>
 
     <button
-      [disabled]="!this.evenementForm.valid"
+      [disabled]="!this.updateEvenementForm.dirty"
       type="submit"
       class="btn btn-primary"
     >

@@ -14,6 +14,13 @@ export class ContainerEvenementsComponent implements OnInit {
   juries = [];
   candidats = [];
 
+  alert: boolean = false;
+
+  success = 'Success';
+  deleteMsgCritere = 'Critere supprimé avec succès';
+  deleteMsgJury = 'Jury supprimé avec succès';
+  deleteMsgCandidat = 'Candidat supprimé avec succès';
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -79,7 +86,17 @@ export class ContainerEvenementsComponent implements OnInit {
   }
 
   deleteCritere(critereId) {
-    console.log('delete critere ' + critereId);
+    const message = confirm('Etes-vous sur de vouloir supprimer ce critere');
+    if (message) {
+      this.containerEvenementService
+        .deleteCritere(critereId)
+        .subscribe((res) => {
+          console.log(res), this.getAllCriteres();
+        });
+
+      this.alert = true;
+      this.alertCloseAfterDelay();
+    }
   }
 
   updateJury(juryId) {
@@ -87,7 +104,15 @@ export class ContainerEvenementsComponent implements OnInit {
   }
 
   deleteJury(juryId) {
-    console.log(juryId);
+    const message = confirm('Etes-vous sur de vouloir supprimer ce jury ');
+    if (message) {
+      this.containerEvenementService
+        .deleteJury(juryId)
+        .subscribe(() => this.getAllJurys());
+
+      this.alert = true;
+      this.alertCloseAfterDelay();
+    }
   }
 
   updateCandidat(candidatId) {
@@ -96,5 +121,15 @@ export class ContainerEvenementsComponent implements OnInit {
 
   deleteCandidat(candidatId) {
     console.log(candidatId);
+  }
+
+  alertClose() {
+    this.alert = false;
+  }
+
+  alertCloseAfterDelay() {
+    setTimeout(() => {
+      this.alert = false;
+    }, 5000);
   }
 }

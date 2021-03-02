@@ -11,4 +11,8 @@ export class EvenementService {
   getAllEvenements(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/evenements/participant`);
   }
+
+  deleteEvenement(evenementId) {
+    return this.http.delete(`${this.apiUrl}/evenements/${evenementId}`);
+  }
 }

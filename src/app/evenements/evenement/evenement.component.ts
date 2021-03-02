@@ -9,6 +9,7 @@ import { EvenementService } from './evenement.service';
 })
 export class EvenementComponent implements OnInit {
   evenements = [];
+  alert: boolean = false;
 
   constructor(
     private evenementService: EvenementService,
@@ -25,15 +26,34 @@ export class EvenementComponent implements OnInit {
     });
   }
 
-  editEvent(value) {
-    console.log(value);
+  editEvent(eventId) {
+    this._router.navigate(['/update-evenement', eventId]);
   }
 
   deleteEvent(value) {
-    console.log(value);
+    const message = confirm('Etes-vous sur de vouloir supprimer cet evenement');
+    if (message) {
+      this.evenementService.deleteEvenement(value).subscribe((res) => {
+        this.getAllEvenements();
+      });
+
+      this.alert = true;
+    }
+
+    this.alertCloseAfterDelay();
   }
 
   sendEventId(eventId) {
     this._router.navigate(['/container-evenements', eventId]);
+  }
+
+  alertClose() {
+    this.alert = false;
+  }
+
+  alertCloseAfterDelay() {
+    setTimeout(() => {
+      this.alert = false;
+    }, 5000);
   }
 }

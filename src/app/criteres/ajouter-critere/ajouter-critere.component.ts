@@ -12,6 +12,7 @@ import { AjouterCritereService } from './ajouter-critere.service';
 export class AjouterCritereComponent implements OnInit {
   evenementId;
   critereForm: FormGroup;
+  alert: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,21 +33,31 @@ export class AjouterCritereComponent implements OnInit {
   readIdEventFromRoute() {
     this.route.paramMap.subscribe((params) => {
       this.evenementId = +params.get('id');
-      if (this.evenementId) {
-        console.log('evenement id ' + this.evenementId);
-      }
     });
   }
 
   onSaveCritere() {
     if (this.critereForm.valid) {
-      this.critereForm.controls.evenement_id = this.evenementId;
+      this.critereForm.controls.evenement_id.setValue(this.evenementId);
       const critere = this.critereForm.value;
       this.ajouterCritereService.ajouterCritere(critere).subscribe((res) => {
         console.log(res), (err: HttpErrorResponse) => console.log(err);
       });
 
       this.critereForm.reset();
+      this.alert = true;
     }
+
+    this.alertCloseAfterDelay();
+  }
+
+  alertClose() {
+    this.alert = false;
+  }
+
+  alertCloseAfterDelay() {
+    setTimeout(() => {
+      this.alert = false;
+    }, 5000);
   }
 }

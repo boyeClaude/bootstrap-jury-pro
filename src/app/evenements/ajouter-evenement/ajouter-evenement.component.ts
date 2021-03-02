@@ -34,27 +34,34 @@ export class AjouterEvenementComponent implements OnInit {
 
   onSaveEvenement() {
     if (this.evenementForm.valid) {
-      let formadata: FormData = new FormData();
-      delete this.evenementForm.value.evenement_photo;
-      formadata.append('file', this.selectedFile);
-      formadata.append('evenement', JSON.stringify(this.evenementForm.value));
-      this.ajouterEvenementService.addEvenement(formadata).subscribe(
-        (res) => console.log(res),
-        (error) => console.log(error)
-      );
-      this.evenementForm.reset();
-      this.alert = true;
+      if (this.evenementForm.dirty) {
+        this.saveEvenement();
+        this.evenementForm.reset();
+        this.alert = true;
+      }
     }
+
+    this.alertCloseAfterDelay();
+  }
+
+  saveEvenement() {
+    let formadata: FormData = new FormData();
+    delete this.evenementForm.value.evenement_photo;
+    formadata.append('file', this.selectedFile);
+    formadata.append('evenement', JSON.stringify(this.evenementForm.value));
+    this.ajouterEvenementService.addEvenement(formadata).subscribe(
+      (res) => console.log(res),
+      (error) => console.log(error)
+    );
   }
 
   alertClose() {
     this.alert = false;
-    console.log(this.alert);
   }
 
-  // alertCloseAfterDelay() {
-  //   setTimeout(() => {
-  //     this.alert = false;
-  //   }, 1000);
-  // }
+  alertCloseAfterDelay() {
+    setTimeout(() => {
+      this.alert = false;
+    }, 5000);
+  }
 }

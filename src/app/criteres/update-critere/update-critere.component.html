@@ -1,12 +1,37 @@
 <app-header></app-header>
+<!-- {{ UpdateCritereForm.value | json }} <br /> -->
+<!-- <p>form valid: {{ UpdateCritereForm.valid | json }} <br /></p>
+<p>form dirty : {{ UpdateCritereForm.dirty | json }}</p>
+
+<p>form asdirty : {{ UpdateCritereForm.markAsDirty | json }}</p>
+
+<p>form as touched : {{ UpdateCritereForm.markAsTouched | json }}</p>
+
+<p>form as touched : {{ UpdateCritereForm.markAsUntouched | json }}</p>
+
+<p>form pristine : {{ UpdateCritereForm.pristine | json }}</p> -->
 
 <div class="container my-5">
   <h3 class="mx-5">Modifier Critere</h3>
+  <!--modal success-->
+  <app-modal-alert
+    [success]="true"
+    [alert]="alert"
+    [alertMessage]="'Success'"
+    [message]="'Modification effectuée avec succès'"
+    (alertClose)="alertClose()"
+  >
+  </app-modal-alert>
   <form
     [formGroup]="UpdateCritereForm"
     (ngSubmit)="onUpdateCritere()"
     class="mx-5"
   >
+    <div *ngIf="!this.critere?.evenement_id" class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Id</label>
+      <input type="text" class="form-control" formControlName="evenement_id" />
+    </div>
+
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Libelle</label>
       <input
@@ -18,7 +43,7 @@
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Bareme</label>
       <input
-        type="text"
+        type="number"
         class="form-control"
         formControlName="critere_bareme"
       />
@@ -26,7 +51,7 @@
 
     <button
       type="submit"
-      [disabled]="!this.UpdateCritereForm.valid"
+      [disabled]="!this.UpdateCritereForm.dirty"
       class="btn btn-primary"
     >
       Enregistrer
