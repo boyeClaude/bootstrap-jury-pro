@@ -24,12 +24,12 @@ export class UpdateEvenementComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateEvenementForm = this.fb.group({
-      evenement_photo: ['', Validators.required],
+      evenement_photo: [],
       evenement_nom: ['', Validators.required],
       evenement_type: ['', Validators.required],
       evenement_date_debut: ['', Validators.required],
       evenement_date_fin: ['', Validators.required],
-      evenement_id: [''],
+      evenement_id: [],
     });
 
     this.readIdFromRoute();
@@ -64,9 +64,18 @@ export class UpdateEvenementComponent implements OnInit {
     });
   }
 
-  onUpdateEvenement() {}
-
-  alertClose() {
-    this.alert = true;
+  onUpdateEvenement() {
+    // if (this.updateEvenementForm.dirty) {
+    //   let evenement = this.updateEvenementForm.value;
+    //   if (this.selectedFile == null) {
+    //     console.log(evenement);
+    //     evenement.evenement_photo = this.event?.evenement_photo;
+    //   }
+    //   console.log('avec photo', evenement);
+    // }
   }
+
+  // alertClose() {
+  //   this.alert = true;
+  // }
 }
