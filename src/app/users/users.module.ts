@@ -6,11 +6,22 @@ import { HomeComponent } from './home/home.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderJuryComponent } from '../header-jury/header-jury.component';
 import { ModalComponent } from './modal/modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [UsersRoutingModule, CommonModule, MatTabsModule],
+  imports: [
+    UsersRoutingModule,
+    CommonModule,
+    MatTabsModule,
+    ReactiveFormsModule,
+  ],
   exports: [],
-  declarations: [LoginUserComponent, HomeComponent, HeaderJuryComponent, ModalComponent],
+  declarations: [
+    LoginUserComponent,
+    HomeComponent,
+    HeaderJuryComponent,
+    ModalComponent,
+  ],
   providers: [],
 })
 export class UsersModule {}

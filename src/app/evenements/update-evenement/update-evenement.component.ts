@@ -75,7 +75,7 @@ export class UpdateEvenementComponent implements OnInit {
     // }
   }
 
-  // alertClose() {
-  //   this.alert = true;
-  // }
+  alertClose() {
+    this.alert = true;
+  }
 }

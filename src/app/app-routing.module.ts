@@ -17,7 +17,7 @@ import { LoginUserComponent } from './users/login-user/login-user.component';
 
 const routes: Routes = [
   {
-    path: 'user',
+    path: 'user/:id',
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
   },
