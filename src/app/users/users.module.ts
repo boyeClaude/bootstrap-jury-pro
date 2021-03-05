@@ -7,7 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderJuryComponent } from '../header-jury/header-jury.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { NgxStarRatingModule } from 'ngx-star-rating';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MatTabsModule,
     ReactiveFormsModule,
-    // NgxStarRatingModule,
+    NgxStarRatingModule,
   ],
   exports: [],
   declarations: [

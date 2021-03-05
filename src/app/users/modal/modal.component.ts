@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -23,9 +23,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent implements OnInit {
   form: FormGroup;
+  // rating;
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private fb: FormBuilder) {
     // this.form = this.fb.group()
+    this.form = this.fb.group({
+      rating: ['', Validators.required],
+      rating2: ['', Validators.required],
+    });
   }
 
   ngOnInit(): void {}
