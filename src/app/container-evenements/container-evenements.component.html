@@ -65,7 +65,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let critere of criteres">
+              <tr *ngFor="let critere of critereByEvent">
                 <td>{{ critere?.critere_libelle }}</td>
                 <td>{{ critere?.critere_bareme }}</td>
                 <td>
@@ -83,7 +83,7 @@
                   </button>
                 </td>
               </tr>
-              <tr *ngIf="!criteres.length">
+              <tr *ngIf="!critereByEvent.length">
                 <td colspan="3" class="text-center">
                   Aucune information disponible
                 </td>
@@ -126,7 +126,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let jury of juries">
+              <tr *ngFor="let jury of juryByEvent">
                 <td>{{ jury?.code_id }}</td>
                 <td>{{ jury?.jury_nom_complet }}</td>
                 <td>{{ jury?.jury_telephone }}</td>
@@ -146,7 +146,7 @@
                   </button>
                 </td>
               </tr>
-              <tr *ngIf="!juries.length">
+              <tr *ngIf="!juryByEvent.length">
                 <td colspan="5" class="text-center">
                   Aucune informations disponible
                 </td>
@@ -160,6 +160,14 @@
       <div class="m-4">
         <!-- <app-candidats>Participants</app-candidats> -->
         <div class="bg-light p-5">
+          <app-modal-alert
+            [success]="!true"
+            [alert]="alert"
+            [alertMessage]="success"
+            [message]="deleteMsgCandidat"
+            (alertClose)="alertClose()"
+          >
+          </app-modal-alert>
           <div class="container">
             <div class="d-flex justify-content-between">
               <p class="my-2" style="font-size: 1.2rem; font-weight: bold">
@@ -176,7 +184,7 @@
             </div>
             <div class="row overflow-x">
               <div class="d-flex">
-                <ng-container *ngFor="let candidat of candidats">
+                <ng-container *ngFor="let candidat of candidatsByEvent">
                   <div class="col-sm m-4">
                     <div class="card" style="width: 18rem">
                       <a routerLink="/container-evenements">
@@ -210,6 +218,11 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!candidatsByEvent?.length">
+                  <div>
+                    <p>Aucun candidats</p>
                   </div>
                 </ng-container>
               </div>

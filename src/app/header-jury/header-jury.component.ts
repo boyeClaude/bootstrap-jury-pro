@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-jury',
   templateUrl: './header-jury.component.html',
-  styleUrls: ['./header-jury.component.scss']
+  styleUrls: ['./header-jury.component.scss'],
 })
 export class HeaderJuryComponent implements OnInit {
+  @Input() nomComplet;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  logout() {
+    this.router.navigate(['/evenements']);
   }
-
 }

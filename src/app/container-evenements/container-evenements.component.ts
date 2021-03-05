@@ -9,10 +9,14 @@ import { ContainerEvenementsService } from './container-evenements.service';
   styleUrls: ['./container-evenements.component.scss'],
 })
 export class ContainerEvenementsComponent implements OnInit {
+  evenementId;
   singleEvenement: any = {};
   criteres = [];
   juries = [];
   candidats = [];
+  candidatsByEvent: any = [];
+  critereByEvent: any = [];
+  juryByEvent: any = [];
 
   alert: boolean = false;
 
@@ -29,16 +33,19 @@ export class ContainerEvenementsComponent implements OnInit {
 
   ngOnInit(): void {
     this.readIdFromRoute();
-    this.getAllCriteres();
-    this.getAllCandidats();
-    this.getAllJurys();
+    // this.getAllCandidats();
+    // this.getAllCriteres();
+    // this.getAllJurys();
   }
 
   readIdFromRoute() {
     this.route.paramMap.subscribe((params) => {
-      const eventId = +params.get('id');
-      if (eventId) {
-        this.getEvenementById(eventId);
+      this.evenementId = +params.get('id');
+      if (this.evenementId) {
+        this.getEvenementById(this.evenementId);
+        this.getCritereForEachEvent(this.evenementId);
+        this.getCandidatsForEachEvent(this.evenementId);
+        this.getAllJuryForEachEvent(this.evenementId);
       }
     });
   }
@@ -51,35 +58,35 @@ export class ContainerEvenementsComponent implements OnInit {
       });
   }
 
-  getAllCriteres() {
-    return this.containerEvenementService.getAllCriteres().subscribe((res) => {
-      (this.criteres = res), console.log(this.criteres);
+  // getAllCriteres() {
+  //   return this.containerEvenementService.getAllCriteres().subscribe((res) => {
+  //     (this.criteres = res), console.log(this.criteres);
 
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
-      };
-    });
-  }
+  //     (err: HttpErrorResponse) => {
+  //       console.log(err.message);
+  //     };
+  //   });
+  // }
 
-  getAllJurys() {
-    this.containerEvenementService.getAllJurys().subscribe(
-      (res) => {
-        this.juries = res;
-        console.log(res);
-      },
-      (err: HttpErrorResponse) => console.log(err.message)
-    );
-  }
+  // getAllJurys() {
+  //   this.containerEvenementService.getAllJurys().subscribe(
+  //     (res) => {
+  //       this.juries = res;
+  //       console.log(res);
+  //     },
+  //     (err: HttpErrorResponse) => console.log(err.message)
+  //   );
+  // }
 
-  getAllCandidats() {
-    this.containerEvenementService.getAllCandidats().subscribe(
-      (res) => {
-        console.log(res);
-        this.candidats = res;
-      },
-      (err: HttpErrorResponse) => console.log(err.message)
-    );
-  }
+  // getAllCandidats() {
+  //   this.containerEvenementService.getAllCandidats().subscribe(
+  //     (res) => {
+  //       console.log(res);
+  //       this.candidats = res;
+  //     },
+  //     (err: HttpErrorResponse) => console.log(err.message)
+  //   );
+  // }
 
   updateCritere(critereId) {
     this.router.navigate(['/update-critere', critereId]);
@@ -91,7 +98,7 @@ export class ContainerEvenementsComponent implements OnInit {
       this.containerEvenementService
         .deleteCritere(critereId)
         .subscribe((res) => {
-          console.log(res), this.getAllCriteres();
+          console.log(res), this.getCritereForEachEvent(this?.evenementId);
         });
 
       this.alert = true;
@@ -108,7 +115,7 @@ export class ContainerEvenementsComponent implements OnInit {
     if (message) {
       this.containerEvenementService
         .deleteJury(juryId)
-        .subscribe(() => this.getAllJurys());
+        .subscribe(() => this.getAllJuryForEachEvent(this.evenementId));
 
       this.alert = true;
       this.alertCloseAfterDelay();
@@ -120,7 +127,17 @@ export class ContainerEvenementsComponent implements OnInit {
   }
 
   deleteCandidat(candidatId) {
-    console.log(candidatId);
+    const message = confirm('Etes-vous sur de vouloir supprimer ce candidat');
+    if (message) {
+      this.containerEvenementService
+        .deleteCandidat(candidatId)
+        .subscribe(() => {
+          this.getCandidatsForEachEvent(this.evenementId);
+        });
+
+      this.alert = true;
+      this.alertCloseAfterDelay();
+    }
   }
 
   alertClose() {
@@ -131,5 +148,27 @@ export class ContainerEvenementsComponent implements OnInit {
     setTimeout(() => {
       this.alert = false;
     }, 5000);
+  }
+
+  getCritereForEachEvent(id) {
+    this.containerEvenementService
+      .getAllCriteresForEachEvent(id)
+      .subscribe((critere) => {
+        this.critereByEvent = critere;
+      });
+  }
+
+  getCandidatsForEachEvent(id) {
+    this.containerEvenementService
+      .getAllCandidatsForEcahEvent(id)
+      .subscribe((candidat: any) => (this.candidatsByEvent = candidat));
+  }
+
+  getAllJuryForEachEvent(id) {
+    this.containerEvenementService
+      .getAllJuryForEachEvent(id)
+      .subscribe((jury: any) => {
+        this.juryByEvent = jury;
+      });
   }
 }

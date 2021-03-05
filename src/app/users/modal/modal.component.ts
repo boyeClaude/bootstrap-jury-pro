@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -21,7 +22,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   ],
 })
 export class ModalComponent implements OnInit {
-  constructor(private modalService: NgbModal) {}
+  form: FormGroup;
+
+  constructor(private modalService: NgbModal) {
+    // this.form = this.fb.group()
+  }
 
   ngOnInit(): void {}
 

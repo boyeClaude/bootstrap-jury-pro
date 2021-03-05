@@ -13,7 +13,7 @@ export class LoginUserComponent implements OnInit {
 
   constructor(
     private loginJuryService: LoginJuryService,
-    private route: Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class LoginUserComponent implements OnInit {
   getJuryByTelephone(value) {
     this.loginJuryService.getJuryByTelephone(value).subscribe((res) => {
       if (res) {
-        this.route.navigate(['/user', res.jury_id]);
+        this.router.navigate(['/user', res.jury_id]);
       } else {
         alert('pas de jury');
       }

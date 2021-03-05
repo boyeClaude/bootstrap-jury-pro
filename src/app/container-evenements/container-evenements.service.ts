@@ -13,16 +13,28 @@ export class ContainerEvenementsService {
     return this._http.get(`${this.apiUrl}/evenements/${id}`);
   }
 
-  getAllCriteres(): Observable<any[]> {
-    return this._http.get<any[]>(`${this.apiUrl}/criteres`);
+  // getAllCriteres(): Observable<any[]> {
+  //   return this._http.get<any[]>(`${this.apiUrl}/criteres`);
+  // }
+
+  // getAllJurys(): Observable<any[]> {
+  //   return this._http.get<any[]>(`${this.apiUrl}/jury`);
+  // }
+
+  // getAllCandidats(): Observable<any> {
+  //   return this._http.get<any>(`${this.apiUrl}/candidats`);
+  // }
+
+  getAllCriteresForEachEvent(id) {
+    return this._http.get(`${this.apiUrl}/criteres/evenement/${id}`);
   }
 
-  getAllJurys(): Observable<any[]> {
-    return this._http.get<any[]>(`${this.apiUrl}/jury`);
+  getAllCandidatsForEcahEvent(id) {
+    return this._http.get(`${this.apiUrl}/candidats/evenement/${id}`);
   }
 
-  getAllCandidats(): Observable<any> {
-    return this._http.get<any>(`${this.apiUrl}/candidats`);
+  getAllJuryForEachEvent(id) {
+    return this._http.get(`${this.apiUrl}/jury/evenement/${id}`);
   }
 
   deleteJury(juryId: any): Observable<any> {
